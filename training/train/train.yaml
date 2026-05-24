@@ -1,0 +1,22 @@
+model_root: ./checkpoints/
+workers: 4
+verbose: 1
+patience: 3
+pickle_feature_encoder: True
+save_best_only: True
+eval_steps: null
+debug_mode: False
+group_id: null
+use_features: null
+
+loss: mse
+metrics: [RMSE, MAE]
+task: regression
+optimizer: adam
+learning_rate: 1.0e-3
+batch_size: 4096
+epochs: 10
+shuffle: True
+seed: 2024
+monitor: RMSE
+monitor_mode: min

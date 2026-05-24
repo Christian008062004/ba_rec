@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git lfs *)",
+      "Bash(git -C /Users/Christian.Grosse.Lanwer@agravis.de/Documents/Programmieren/ba_rec lfs status)"
+    ]
+  }
+}
