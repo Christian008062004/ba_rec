@@ -1,0 +1,208 @@
+{
+  "dataset_id": "webshop_data",
+  "labels": [
+    "label"
+  ],
+  "total_features": 0,
+  "input_length": 0,
+  "features": [
+    {
+      "label": {
+        "active": true,
+        "dtype": "float",
+        "type": "meta"
+      }
+    },
+    {
+      "user_id": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 21384,
+        "padding_idx": 0
+      }
+    },
+    {
+      "item_id": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 3872,
+        "pretrained_emb": "item_embedding_matrix.npz",
+        "pretrain_dim": 768,
+        "freeze_emb": true,
+        "padding_idx": 0,
+        "oov_idx": 0
+      }
+    },
+    {
+      "brand": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 371,
+        "padding_idx": 0
+      }
+    },
+    {
+      "category1": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "shared_emb": "category_shared",
+        "vocab_size": 300,
+        "padding_idx": 0
+      }
+    },
+    {
+      "category2": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "shared_emb": "category_shared",
+        "vocab_size": 299,
+        "padding_idx": 0
+      }
+    },
+    {
+      "category3": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "shared_emb": "category_shared",
+        "vocab_size": 264,
+        "padding_idx": 0
+      }
+    },
+    {
+      "category4": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "shared_emb": "category_shared",
+        "vocab_size": 263,
+        "padding_idx": 0
+      }
+    },
+    {
+      "geo_country": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 48,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_type": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 4,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_os": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 9,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_model": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 241,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_manufacturer": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 23,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_browser": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 52,
+        "padding_idx": 0
+      }
+    },
+    {
+      "device_type_detail": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 4,
+        "padding_idx": 0
+      }
+    },
+    {
+      "price": {
+        "active": true,
+        "dtype": "float",
+        "type": "numeric"
+      }
+    },
+    {
+      "geo_latitude": {
+        "active": true,
+        "dtype": "float",
+        "type": "numeric"
+      }
+    },
+    {
+      "geo_longitude": {
+        "active": true,
+        "dtype": "float",
+        "type": "numeric"
+      }
+    },
+    {
+      "day_of_week": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 4,
+        "padding_idx": 0
+      }
+    },
+    {
+      "hour_of_day": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 25,
+        "padding_idx": 0
+      }
+    },
+    {
+      "month": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 2,
+        "padding_idx": 0
+      }
+    },
+    {
+      "is_holiday": {
+        "active": true,
+        "dtype": "int",
+        "type": "categorical",
+        "vocab_size": 2,
+        "padding_idx": 0
+      }
+    }
+  ]
+}

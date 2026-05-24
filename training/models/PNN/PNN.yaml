@@ -1,0 +1,7 @@
+embedding_dim: 16
+use_inner_product: True
+use_outer_product: False
+dnn_hidden_units: [400, 400, 400]
+dnn_activations: relu
+net_dropout: 0.1
+batch_norm: True
