@@ -69,19 +69,6 @@ def build_feature_map_json(params: dict) -> None:
     logging.info(f"Generated feature_map.json at {json_path}")
 
 
-def prepare_feature_vocab(params: dict) -> None:
-    """Generates feature_vocab.json with identity index mapping for all categorical features."""
-    vocab_path = os.path.join(params["data_root"], "feature_vocab.json")
-    vocab = {}
-    for spec in params.get("feature_specs", []):
-        if spec.get("type") != "categorical":
-            continue
-        name = spec["name"]
-        vocab[name] = {str(i): i for i in range(spec["vocab_size"])}
-    with open(vocab_path, "w", encoding="utf-8") as f:
-        json.dump(vocab, f)
-    logging.info(f"Generated feature_vocab.json at {vocab_path}")
-
 
 def prepare_pretrained_emb(params: dict) -> None:
     """Converts .npy embedding files to .npz format expected by FuxiCTR."""
@@ -134,7 +121,6 @@ def run(dataset_yaml: str = _DEFAULT_YAML) -> None:
     prepare_pretrained_emb(params)
     prepare_npz_data(params)
     build_feature_map_json(params)
-    prepare_feature_vocab(params)
     logging.info("FuxiCTR-Prep abgeschlossen.")
 
 

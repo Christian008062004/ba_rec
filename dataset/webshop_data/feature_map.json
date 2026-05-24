@@ -18,7 +18,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 360256,
+        "vocab_size": 21384,
         "padding_idx": 0
       }
     },
@@ -27,7 +27,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 8432,
+        "vocab_size": 3872,
         "pretrained_emb": "item_embedding_matrix.npz",
         "pretrain_dim": 768,
         "freeze_emb": true,
@@ -40,7 +40,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 456,
+        "vocab_size": 371,
         "padding_idx": 0
       }
     },
@@ -50,7 +50,7 @@
         "dtype": "int",
         "type": "categorical",
         "shared_emb": "category_shared",
-        "vocab_size": 333,
+        "vocab_size": 300,
         "padding_idx": 0
       }
     },
@@ -60,7 +60,7 @@
         "dtype": "int",
         "type": "categorical",
         "shared_emb": "category_shared",
-        "vocab_size": 332,
+        "vocab_size": 299,
         "padding_idx": 0
       }
     },
@@ -70,7 +70,7 @@
         "dtype": "int",
         "type": "categorical",
         "shared_emb": "category_shared",
-        "vocab_size": 292,
+        "vocab_size": 264,
         "padding_idx": 0
       }
     },
@@ -80,7 +80,7 @@
         "dtype": "int",
         "type": "categorical",
         "shared_emb": "category_shared",
-        "vocab_size": 291,
+        "vocab_size": 263,
         "padding_idx": 0
       }
     },
@@ -89,7 +89,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 100,
+        "vocab_size": 48,
         "padding_idx": 0
       }
     },
@@ -98,7 +98,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 5,
+        "vocab_size": 4,
         "padding_idx": 0
       }
     },
@@ -107,7 +107,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 11,
+        "vocab_size": 9,
         "padding_idx": 0
       }
     },
@@ -116,7 +116,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 824,
+        "vocab_size": 241,
         "padding_idx": 0
       }
     },
@@ -125,7 +125,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 64,
+        "vocab_size": 23,
         "padding_idx": 0
       }
     },
@@ -134,7 +134,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 81,
+        "vocab_size": 52,
         "padding_idx": 0
       }
     },
@@ -143,7 +143,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 6,
+        "vocab_size": 4,
         "padding_idx": 0
       }
     },
@@ -173,7 +173,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 8,
+        "vocab_size": 4,
         "padding_idx": 0
       }
     },
@@ -191,7 +191,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 4,
+        "vocab_size": 2,
         "padding_idx": 0
       }
     },
@@ -200,7 +200,7 @@
         "active": true,
         "dtype": "int",
         "type": "categorical",
-        "vocab_size": 3,
+        "vocab_size": 2,
         "padding_idx": 0
       }
     }
