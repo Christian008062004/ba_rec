@@ -7,6 +7,7 @@ normalisiert numerische Features (Min-Max), splittet chronologisch in train/vali
 
 from __future__ import annotations
 
+import json
 import os
 import re
 from pathlib import Path
@@ -113,6 +114,7 @@ def build_csv_splits(
 
     # Label-Encoding kategorischer Features
     item_id_mapping: dict = {}
+    all_mappings: dict[str, dict] = {}
     for col in CATEGORICAL_COLS:
         if col in SHARED_CATEGORY_COLS:
             continue
@@ -120,6 +122,7 @@ def build_csv_splits(
             print(f"  [Warnung] Spalte {col!r} fehlt, überspringe.")
             continue
         df[col], mapping = _label_encode(df, col)
+        all_mappings[col] = mapping
         if col == "item_id":
             item_id_mapping = mapping
 
@@ -156,6 +159,12 @@ def build_csv_splits(
         np.savez(npz_path, **arrays)
 
     print(f"CSVs + NPZs geschrieben: train={len(train_df):,}  valid={len(valid_df):,}  test={len(test_df):,}")
+
+    # Feature-Vocab speichern: Originalwert → encoded Integer
+    vocab_path = output_dir / "feature_vocab.json"
+    with open(vocab_path, "w", encoding="utf-8") as f:
+        json.dump(all_mappings, f, ensure_ascii=False, indent=2)
+    print(f"feature_vocab.json gespeichert: {len(all_mappings)} Features → {vocab_path}")
 
     # vocab_sizes in dataset.yaml aktualisieren
     if dataset_yaml.exists():

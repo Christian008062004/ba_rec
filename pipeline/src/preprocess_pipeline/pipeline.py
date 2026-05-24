@@ -27,7 +27,6 @@ from preprocess_pipeline.steps.build_csv_splits import build_csv_splits
 from preprocess_pipeline.steps.fuxictr_prep import (
     fix_vocab_sizes,
     build_feature_map_json,
-    prepare_feature_vocab,
     load_params,
 )
 
@@ -84,7 +83,6 @@ def main(argv: list[str] | None = None) -> None:
     fix_vocab_sizes()
     params = load_params()
     build_feature_map_json(params)
-    prepare_feature_vocab(params)
 
     print("=== Pipeline abgeschlossen ===")
 
