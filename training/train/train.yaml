@@ -9,14 +9,14 @@ debug_mode: False
 group_id: null
 use_features: null
 
-loss: mse
-metrics: [RMSE, MAE]
-task: regression
+loss: binary_crossentropy
+metrics: [AUC, logloss]
+task: binary_classification
 optimizer: adam
 learning_rate: 1.0e-3
 batch_size: 4096
 epochs: 10
 shuffle: True
 seed: 2024
-monitor: RMSE
-monitor_mode: min
+monitor: AUC
+monitor_mode: max

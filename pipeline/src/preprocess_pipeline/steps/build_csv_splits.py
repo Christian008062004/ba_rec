@@ -94,9 +94,9 @@ def build_csv_splits(
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
-    # Label-Spalte: rating direkt als Zielgröße (Regression)
+    # Label-Spalte: 0 = kein Klick (syntheticView), 1 = Klick (view/basket/order)
     if LABEL_COL in df.columns:
-        df["label"] = df[LABEL_COL].astype(float)
+        df["label"] = (df[LABEL_COL].astype(float) > 0).astype(int)
         df = df.drop(columns=[LABEL_COL])
     elif "label" not in df.columns:
         raise ValueError("Keine label/rating-Spalte gefunden.")
