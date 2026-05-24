@@ -1,0 +1,12 @@
+embedding_dim: 16
+mlp1_hidden_units: [400, 400, 400]
+mlp1_hidden_activations: relu
+mlp2_hidden_units: [400, 400, 400]
+mlp2_hidden_activations: relu
+use_fs: True
+fs_hidden_units: [400, 400]
+fs1_context: []
+fs2_context: []
+num_heads: 1
+net_dropout: 0.1
+batch_norm: True

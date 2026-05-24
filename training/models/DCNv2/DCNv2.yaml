@@ -1,0 +1,8 @@
+embedding_dim: 16
+model_structure: parallel
+num_cross_layers: 3
+stacked_dnn_hidden_units: []
+parallel_dnn_hidden_units: [400, 400, 400]
+dnn_activations: relu
+net_dropout: 0.1
+batch_norm: True
