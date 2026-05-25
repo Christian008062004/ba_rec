@@ -1,0 +1,33 @@
+data_path: retrieval/data/
+TIME_FIELD: timestamp
+load_col:
+  inter: [user_id, item_id, timestamp]
+
+user_inter_num_interval: "[3,inf)"
+
+# NARM Hyperparameter
+embedding_size: 64
+hidden_size: 128
+n_layers: 1
+dropout_probs: [0.25, 0.5]
+loss_type: CE
+MAX_ITEM_LIST_LENGTH: 50
+
+epochs: 50
+train_batch_size: 256
+learner: adam
+learning_rate: 0.001
+
+eval_args:
+  split:
+    LS: valid_and_test
+  order: TO
+  group_by: user
+  mode:
+    valid: full
+    test: full
+metrics: [Recall, NDCG, Hit]
+topk: [10, 20]
+valid_metric: Recall@10
+
+seed: 2024
