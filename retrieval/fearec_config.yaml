@@ -21,6 +21,8 @@ dual_domain: True
 loss_type: CE
 MAX_ITEM_LIST_LENGTH: 50
 
+train_neg_sample_args: ~
+
 epochs: 50
 train_batch_size: 256
 learner: adam
