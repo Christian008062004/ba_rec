@@ -1,0 +1,17 @@
+# Re-Ranker Hyperparameter
+sasrec_dim: 64          # SASRec hidden_size (muss zu trained/SASRec-*.pth passen)
+embedding_dim: 16       # Embedding-Größe für kategorische Features
+mlp_hidden_units: [256, 128, 64]
+dropout: 0.1
+batch_norm: true
+
+learning_rate: 0.001
+batch_size: 4096
+epochs: 10
+patience: 3             # Early Stopping
+neg_samples: 4          # Negative Samples pro positiver Interaktion
+seed: 2024
+
+# Ausgabepfade
+dataset_path: ./reranker/data/reranker_dataset.npz
+model_path:   ./reranker/checkpoints/reranker.pt

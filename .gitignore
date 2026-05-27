@@ -25,3 +25,12 @@ checkpoints/
 # Training-Ausgaben
 training/checkpoints/
 saved/
+
+# Grosse Modelldateien
+trained/*.model
+trained/*.pth
+trained/user_context.json
+
+# Generierte Datensaetze (werden auf HPC neu erstellt)
+dataset/*_seq.npz
+dataset/smoke_seq.npz

@@ -14,8 +14,8 @@ TRAINING_DIR = Path(__file__).parent.parent
 DATASET_DIR = TRAINING_DIR.parent / "dataset"
 
 
-def load_params(model_name):
-    with open(DATASET_DIR / "dataset.yaml") as f:
+def load_params(model_name, dataset_name="dataset"):
+    with open(DATASET_DIR / f"{dataset_name}.yaml") as f:
         dataset_params = yaml.safe_load(f)
     with open(TRAINING_DIR / "train" / "train.yaml") as f:
         train_params = yaml.safe_load(f)
@@ -26,10 +26,11 @@ def load_params(model_name):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", required=True, help="Modellname, z.B. AFN, DCNv2, FinalMLP, PNN")
+    parser.add_argument("--model",   required=True,      help="Modellname, z.B. AFN, DCNv2, FinalMLP, PNN")
+    parser.add_argument("--dataset", default="dataset",  help="Dataset-Config (default: dataset, seq: dataset_seq)")
     args = parser.parse_args()
 
-    params = load_params(args.model)
+    params = load_params(args.model, args.dataset)
     # Unique model_id per run so logs and checkpoints don't overwrite each other
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     params["model_id"] = f"{args.model}_{timestamp}"
