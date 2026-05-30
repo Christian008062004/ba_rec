@@ -36,7 +36,7 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
     uid_field = dataset.uid_field
     item_seq_field = model.ITEM_SEQ        # 'item_id_list'
     item_seq_len_field = model.ITEM_SEQ_LEN  # 'item_id_list_len'
-    max_seq_len = config.get("MAX_ITEM_LIST_LENGTH", 50)
+    max_seq_len = config["MAX_ITEM_LIST_LENGTH"] if "MAX_ITEM_LIST_LENGTH" in config else 50
 
     # User-Sequenzen aus dem Dataset aufbauen
     inter = dataset.inter_feat
