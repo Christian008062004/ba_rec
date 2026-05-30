@@ -221,9 +221,18 @@ def main():
     # AFN-Splits laden
     data_dir = Path(args.data_dir) if args.data_dir else DATASET_DIR
     log.info(f"Lade AFN-Splits aus {data_dir} ...")
-    train_df = pd.read_csv(data_dir / "train.csv")
-    valid_df = pd.read_csv(data_dir / "valid.csv")
-    test_df  = pd.read_csv(data_dir / "test.csv")
+
+    def load_split(name: str) -> pd.DataFrame:
+        npz_path = data_dir / f"{name}.csv.npz"
+        csv_path = data_dir / f"{name}.csv"
+        if npz_path.exists():
+            data = np.load(npz_path)
+            return pd.DataFrame({col: data[col] for col in data.files})
+        return pd.read_csv(csv_path)
+
+    train_df = load_split("train")
+    valid_df = load_split("valid")
+    test_df  = load_split("test")
 
     out_dir = data_dir / "cascaded"
     out_dir.mkdir(parents=True, exist_ok=True)
