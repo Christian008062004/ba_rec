@@ -25,3 +25,5 @@ checkpoints/
 # Training-Ausgaben
 training/checkpoints/
 saved/
+
+trained
