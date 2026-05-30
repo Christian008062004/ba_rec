@@ -80,7 +80,7 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
 
         for i, uid in enumerate(batch_uids):
             user_scores = scores[i].clone()
-            seen = history_matrix[uid]
+            seen = history_matrix[uid].long()
             seen = seen[seen != 0]
             user_scores[seen] = -float("inf")
             user_scores[0] = -float("inf")  # Padding
