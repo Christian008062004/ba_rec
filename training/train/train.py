@@ -27,9 +27,21 @@ def load_params(model_name):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True, help="Modellname, z.B. AFN, DCNv2, FinalMLP, PNN")
+    parser.add_argument(
+        "--data-dir",
+        default=None,
+        help="Alternatives Daten-Verzeichnis (z.B. dataset/cascaded/). "
+             "Überschreibt train_data/valid_data/test_data aus dataset.yaml.",
+    )
     args = parser.parse_args()
 
     params = load_params(args.model)
+
+    if args.data_dir:
+        data_dir = Path(args.data_dir)
+        params["train_data"] = str(data_dir / "train.csv")
+        params["valid_data"] = str(data_dir / "valid.csv")
+        params["test_data"]  = str(data_dir / "test.csv")
     # Unique model_id per run so logs and checkpoints don't overwrite each other
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     params["model_id"] = f"{args.model}_{timestamp}"

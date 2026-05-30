@@ -1,5 +1,0 @@
-embedding_dim: 16
-order: 3
-hidden_units: [256, 128, 64]
-net_dropout: 0.1
-batch_norm: True
