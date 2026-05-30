@@ -99,9 +99,10 @@ def build_cascaded_split(
     uid_to_internal: dict,
     iid_to_internal: dict,
     internal_to_iid: dict,
-    iid_mapping: dict,  # encoded_int -> original string (für Rückübersetzung nicht nötig, aber zum Debug)
+    iid_mapping: dict,
     negatives_per_positive: int,
     rng: np.random.Generator,
+    item_features: pd.DataFrame | None = None,  # item_id → item-spezifische Features
 ) -> pd.DataFrame:
     """Baut einen Split-DataFrame mit harten SASRec-Negatives."""
     rows = []
@@ -149,15 +150,18 @@ def build_cascaded_split(
                 neg_row["label"] = 0
                 rows.append(neg_row)
             else:
-                # Kein Kontext-Row vorhanden: Item-Features aus positivem Row übernehmen,
-                # nur item_id austauschen (Preis etc. unbekannt → 0)
                 neg_row = pos_row.to_dict()
                 neg_row["item_id"] = neg_iid_enc
                 neg_row["label"] = 0
-                # Item-spezifische Features nullen
-                for col in ["price", "brand", "category1", "category2", "category3", "category4"]:
-                    if col in neg_row:
-                        neg_row[col] = 0
+                item_cols = ["price", "brand", "category1", "category2", "category3", "category4"]
+                if item_features is not None and neg_iid_enc in item_features.index:
+                    for col in item_cols:
+                        if col in neg_row:
+                            neg_row[col] = item_features.at[neg_iid_enc, col]
+                else:
+                    for col in item_cols:
+                        if col in neg_row:
+                            neg_row[col] = 0
                 rows.append(neg_row)
 
     return pd.DataFrame(rows)
@@ -234,6 +238,11 @@ def main():
     valid_df = load_split("valid")
     test_df  = load_split("test")
 
+    # Item-Feature-Lookup aus allen Splits aufbauen (erste Occurrence pro Item)
+    item_cols = ["item_id", "price", "brand", "category1", "category2", "category3", "category4"]
+    all_items = pd.concat([train_df, valid_df, test_df])[item_cols].drop_duplicates("item_id").set_index("item_id")
+    log.info(f"Item-Feature-Lookup: {len(all_items):,} Items")
+
     out_dir = data_dir / "cascaded"
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -252,6 +261,7 @@ def main():
             iid_mapping=item_vocab,
             negatives_per_positive=args.neg_ratio,
             rng=rng,
+            item_features=all_items,
         )
 
         result = result[all_cols]  # Spaltenreihenfolge sicherstellen
