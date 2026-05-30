@@ -169,6 +169,7 @@ def main():
     parser.add_argument("--topk", type=int, default=100, help="Anzahl SASRec-Kandidaten pro User")
     parser.add_argument("--neg-ratio", type=int, default=4, help="Harte Negatives pro Positive")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--data-dir", default=None, help="Pfad zum AFN-Dataset-Ordner (default: dataset/)")
     args = parser.parse_args()
 
     rng = np.random.default_rng(args.seed)
@@ -218,12 +219,13 @@ def main():
     log.info(f"User-Mapping: {len(uid_afn_to_recbole):,} User gemapped")
 
     # AFN-Splits laden
-    log.info("Lade AFN-Splits ...")
-    train_df = pd.read_csv(DATASET_DIR / "train.csv")
-    valid_df = pd.read_csv(DATASET_DIR / "valid.csv")
-    test_df  = pd.read_csv(DATASET_DIR / "test.csv")
+    data_dir = Path(args.data_dir) if args.data_dir else DATASET_DIR
+    log.info(f"Lade AFN-Splits aus {data_dir} ...")
+    train_df = pd.read_csv(data_dir / "train.csv")
+    valid_df = pd.read_csv(data_dir / "valid.csv")
+    test_df  = pd.read_csv(data_dir / "test.csv")
 
-    out_dir = DATASET_DIR / "cascaded"
+    out_dir = data_dir / "cascaded"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     all_cols = list(train_df.columns)
