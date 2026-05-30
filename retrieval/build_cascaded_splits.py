@@ -44,6 +44,8 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
     for uid, iid in zip(inter[uid_field].tolist(), inter[item_field].tolist()):
         user_seq.setdefault(uid, []).append(iid)
 
+    history_matrix, _ = dataset.history_item_matrix()  # [num_users, max_hist_len]
+
     all_user_ids = list(range(1, dataset.user_num))  # 0 ist Padding
     candidates: dict[int, list[int]] = {}
 
@@ -74,9 +76,6 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
             scores = model.full_sort_predict(interaction)  # [B, num_items]
 
         scores = scores.cpu()
-
-        # Items maskieren die der User bereits gesehen hat
-        history_matrix = dataset.history_item_matrix()  # [num_users, max_hist_len]
 
         for i, uid in enumerate(batch_uids):
             user_scores = scores[i].clone()
