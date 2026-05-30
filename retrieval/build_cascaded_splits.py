@@ -108,7 +108,7 @@ def build_cascaded_split(
 
     positives = split_df[split_df["label"] == 1]
     # negatives aus dem originalen Split für Feature-Lookup
-    split_indexed = split_df.set_index(["user_id", "item_id"])
+    split_indexed = split_df.set_index(["user_id", "item_id"]).sort_index()
 
     for _, pos_row in positives.iterrows():
         uid_enc = int(pos_row["user_id"])
