@@ -34,6 +34,15 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
     model.eval()
     item_field = dataset.iid_field
     uid_field = dataset.uid_field
+    item_seq_field = model.ITEM_SEQ        # 'item_id_list'
+    item_seq_len_field = model.ITEM_SEQ_LEN  # 'item_id_list_len'
+    max_seq_len = config.get("MAX_ITEM_LIST_LENGTH", 50)
+
+    # User-Sequenzen aus dem Dataset aufbauen
+    inter = dataset.inter_feat
+    user_seq: dict[int, list[int]] = {}
+    for uid, iid in zip(inter[uid_field].tolist(), inter[item_field].tolist()):
+        user_seq.setdefault(uid, []).append(iid)
 
     all_user_ids = list(range(1, dataset.user_num))  # 0 ist Padding
     candidates: dict[int, list[int]] = {}
@@ -43,9 +52,22 @@ def generate_candidates(model, dataset, config, topk: int) -> dict[int, list[int
 
     for start in range(0, len(all_user_ids), batch_size):
         batch_uids = all_user_ids[start : start + batch_size]
-        uid_tensor = torch.tensor(batch_uids, dtype=torch.long, device=config["device"])
 
-        interaction = Interaction({uid_field: uid_tensor})
+        seqs, seq_lens = [], []
+        for uid in batch_uids:
+            seq = user_seq.get(uid, [])[-max_seq_len:]
+            seq_lens.append(len(seq))
+            seqs.append([0] * (max_seq_len - len(seq)) + seq)  # links padden
+
+        uid_tensor = torch.tensor(batch_uids, dtype=torch.long, device=config["device"])
+        seq_tensor = torch.tensor(seqs, dtype=torch.long, device=config["device"])
+        seq_len_tensor = torch.tensor(seq_lens, dtype=torch.long, device=config["device"])
+
+        interaction = Interaction({
+            uid_field: uid_tensor,
+            item_seq_field: seq_tensor,
+            item_seq_len_field: seq_len_tensor,
+        })
         interaction = interaction.to(config["device"])
 
         with torch.no_grad():
