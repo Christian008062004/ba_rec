@@ -75,7 +75,7 @@ def run_combination(
     df: pd.DataFrame,
     candidates: int,
     topk: int,
-    log_interval: int = 5000,
+    log_interval: int = 1000,
 ) -> dict:
     hits_pipe,   ndcgs_pipe   = [], []
     hits_sasrec, ndcgs_sasrec = [], []
