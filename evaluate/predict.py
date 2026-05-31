@@ -40,7 +40,7 @@ TRAINING_DIR = REPO_DIR / "training"
 sys.path.insert(0, str(TRAINING_DIR / "models" / "AFN"))
 
 SASREC_CKPT   = REPO_DIR / "trained" / "SASRec-May-25-2026_22-31-38.pth"
-AFN_CKPT      = REPO_DIR / "saved" / "AFN.model"
+AFN_CKPT      = REPO_DIR / "trained" / "AFN_20260525_230921.model"
 FEATURE_VOCAB = DATASET_DIR / "feature_vocab.json"
 
 _FLOAT_FEATS = {"price", "geo_latitude", "geo_longitude"}
