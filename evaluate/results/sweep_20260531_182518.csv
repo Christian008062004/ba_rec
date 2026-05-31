@@ -1,1 +1,0 @@
-candidates,topk,n_evaluated,n_skipped,pipeline_hit,pipeline_ndcg,sasrec_hit,sasrec_ndcg,delta_hit,delta_ndcg,duration_s
